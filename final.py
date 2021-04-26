@@ -106,11 +106,11 @@ model = CNN().to(device)
 def train_loop(dataloader, model, loss_fn, optimizer):
     size = len(dataloader.dataset)
     for batch, (X, y) in enumerate(dataloader):
-        X = X.to(device)
-        y = y.to(device)
+        image = X.to(device)
+        label = y.to(device)
         # Compute prediction and loss
-        pred = model(X)
-        loss = loss_fn(pred, y)
+        pred = model(image)
+        loss = loss_fn(pred, label)
 
         # Backpropagation
         optimizer.zero_grad()
@@ -132,11 +132,11 @@ def test_loop(dataloader, model, loss_fn):
 
     with torch.no_grad():
         for X, y in dataloader:
-            X = X.to(device)
-            y = y.to(device)
-            pred = model(X)
-            test_loss += loss_fn(pred, y).item()
-            correct += (pred.argmax(1) == y).type(torch.float).sum().item()
+            image = X.to(device)
+            label = y.to(device)
+            pred = model(image)
+            test_loss += loss_fn(pred, label).item()
+            correct += (pred.argmax(1) == label).type(torch.float).sum().item()
 
     test_loss /= size
     correct /= size

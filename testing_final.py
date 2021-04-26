@@ -104,11 +104,11 @@ def test_loop(dataloader, model, loss_fn):
 
     with torch.no_grad():
         for X, y in dataloader:
-            X = X.to(device)
-            y = y.to(device)
-            pred = model(X)
-            test_loss += loss_fn(pred, y).item()
-            correct += (pred.argmax(1) == y).type(torch.float).sum().item()
+            image = X.to(device)
+            label = y.to(device)
+            pred = model(image)
+            test_loss += loss_fn(pred, label).item()
+            correct += (pred.argmax(1) == label).type(torch.float).sum().item()
 
     test_loss /= size
     correct /= size
