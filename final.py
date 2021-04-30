@@ -147,17 +147,17 @@ def test_loop(dataloader, model, loss_fn):
 
 
 # Hyper parameters
-learning_rate = 1e-3
-epochs = 25
+learning_rate = 0.0004
+epochs = 5
 # creating formula for loss function
 loss_fn = nn.CrossEntropyLoss()
 # assigning optimizer
-optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
+optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate, momentum = 0.9)
 
 
 # Evaluaton loop
 for t in range(epochs):
-    print(f"Epoch {t+1}\n-------------------------------")
+    print(f"Epoch {t+1}\n-----------------------------")
     train_loop(train_dataloader, model, loss_fn, optimizer)
     test_loop(test_dataloader, model, loss_fn)
     #test_loop(train_dataloader,model, loss_fn)

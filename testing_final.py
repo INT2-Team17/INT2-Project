@@ -122,6 +122,9 @@ loss_fn = nn.CrossEntropyLoss()
 
 
 print("Doing test on the given data...")
+print("Accuracy in training dataset:")
+test_loop(train_dataloader, loaded_model, loss_fn)
+print("Accuracy in testing dataset:")
 test_loop(test_dataloader, loaded_model, loss_fn)
 
 print("Done!")
